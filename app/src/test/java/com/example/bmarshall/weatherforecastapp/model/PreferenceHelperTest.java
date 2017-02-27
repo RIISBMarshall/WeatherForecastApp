@@ -1,5 +1,6 @@
-package com.example.bmarshall.weatherforecastapp;
+package com.example.bmarshall.weatherforecastapp.model;
 
+import com.example.bmarshall.weatherforecastapp.BuildConfig;
 import com.example.bmarshall.weatherforecastapp.model.PreferenceHelper;
 import com.example.bmarshall.weatherforecastapp.view.LocationSelectionView;
 

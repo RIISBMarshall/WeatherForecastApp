@@ -39,17 +39,9 @@ public class LocationSelectionView extends AppCompatActivity {
     }
 
     public void next() {
-        try {
-            if (controller.checkValid(controller.getSavedLocation(this))) {
-                Intent intent = new Intent(LocationSelectionView.this, WeatherForecastView.class);
-                startActivity(intent);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
+        if (controller.checkValid(controller.getSavedLocation(this))) {
+            Intent intent = new Intent(LocationSelectionView.this, WeatherForecastView.class);
+            startActivity(intent);
         }
     }
 }

@@ -1,8 +1,10 @@
-package com.example.bmarshall.weatherforecastapp;
+package com.example.bmarshall.weatherforecastapp.view;
 
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.bmarshall.weatherforecastapp.BuildConfig;
+import com.example.bmarshall.weatherforecastapp.R;
 import com.example.bmarshall.weatherforecastapp.view.LocationSelectionView;
 
 import junit.framework.Assert;

@@ -2,7 +2,6 @@ package com.example.bmarshall.weatherforecastapp.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import java.io.IOException;
 import android.content.SharedPreferences.Editor;
 
 public class PreferenceHelper {
@@ -12,7 +11,7 @@ public class PreferenceHelper {
     public PreferenceHelper() {
     }
 
-    public void saveLocation(String zipCode, Context context) throws IllegalAccessException, InstantiationException, IOException {
+    public void saveLocation(String zipCode, Context context) {
         SharedPreferences settings;
         Editor editor;
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -21,10 +20,11 @@ public class PreferenceHelper {
         editor.apply();
     }
 
-    public String getSavedLocation(Context context) throws IllegalAccessException, InstantiationException, IOException {
+    public String getSavedLocation(Context context) {
         SharedPreferences settings;
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return settings.getString(PREFS_KEY, null);}
+        return settings.getString(PREFS_KEY, null);
+    }
 
     public boolean checkValid(String enteredLocation) {
         if ((enteredLocation != null) && (enteredLocation.length() == 5) && enteredLocation.matches("[0-9]+")) {
