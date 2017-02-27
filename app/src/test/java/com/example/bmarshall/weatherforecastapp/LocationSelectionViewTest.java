@@ -14,6 +14,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
+
 /**
  * Created by bmarshall on 2/24/17.
  */
@@ -33,15 +35,15 @@ public class LocationSelectionViewTest {
     }
 
     @Test
-    public void onClickGoButtonTest(){
+    public void onClickGoButtonTest() throws IllegalAccessException, IOException, InstantiationException {
         zipCodeEditText.setText("48310");
         goButton.callOnClick();
         Assert.assertEquals("Saved Location should be equal to valid location entered",
-                zipCodeEditText.getText(), locationSelectionView.controller.getSavedLocation());
+                zipCodeEditText.getText(), locationSelectionView.controller.getSavedLocation(locationSelectionView));
 
         zipCodeEditText.setText("483105");
         goButton.callOnClick();
         Assert.assertNotSame("Saved Location should not equal invalid location entered",
-                zipCodeEditText.getText(), locationSelectionView.controller.getSavedLocation());
+                zipCodeEditText.getText(), locationSelectionView.controller.getSavedLocation(locationSelectionView));
     }
 }
