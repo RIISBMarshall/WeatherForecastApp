@@ -2,6 +2,7 @@ package com.example.bmarshall.weatherforecastapp.model;
 
 import junit.framework.Assert;
 
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,6 @@ import org.junit.Test;
 
 public class JSONWeatherParserTest {
     private String weatherData;
-    private JSONWeatherParser jsonWeatherParser;
 
     @Before
     public void setUp(){
@@ -23,11 +23,11 @@ public class JSONWeatherParserTest {
                 "\"pressure\":1016.8,\"temp_min\":284.82,\"temp_max\":286.48}, " +
                 "\"wind\":{\"speed\":0.96,\"deg\":285.001}, \"clouds\":{\"all\":0}, " +
                 "\"dt\":1427700245, \"id\":0, \"name\":\"Mountain View\", \"cod\":200}";
-        jsonWeatherParser = new JSONWeatherParser();
     }
 
     @Test
-    public void getDailyWeather(){
+    public void getDailyWeather() throws JSONException {
+        JSONWeatherParser jsonWeatherParser = new JSONWeatherParser();
         Weather weather = jsonWeatherParser.getDailyWeather(weatherData);
 
         Assert.assertEquals("temp should be set to 285.68", "285.68", weather.getTemp());

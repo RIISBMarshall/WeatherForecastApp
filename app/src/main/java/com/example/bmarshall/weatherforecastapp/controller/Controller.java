@@ -7,6 +7,8 @@ import com.example.bmarshall.weatherforecastapp.model.JSONWeatherParser;
 import com.example.bmarshall.weatherforecastapp.model.PreferenceHelper;
 import com.example.bmarshall.weatherforecastapp.model.Weather;
 
+import org.json.JSONException;
+
 public class Controller {
     private Weather weather;
 
@@ -31,11 +33,16 @@ public class Controller {
 
     public void getDailyWeather(String weatherData) {
         JSONWeatherParser jSONWeatherParser = new JSONWeatherParser();
-        weather = jSONWeatherParser.getDailyWeather(weatherData);
+        try {
+            weather = jSONWeatherParser.getDailyWeather(weatherData);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public String fetchWeatherData(String location){
         APIHelper apiHelper = new APIHelper();
+        System.out.println(apiHelper.fetchWeatherData(location));
         return apiHelper.fetchWeatherData(location);
     }
 
