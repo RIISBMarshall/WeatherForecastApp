@@ -1,15 +1,22 @@
 package com.example.bmarshall.weatherforecastapp.model;
 
+import com.example.bmarshall.weatherforecastapp.BuildConfig;
+
 import junit.framework.Assert;
 
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 /**
  * Created by bmarshall on 2/27/17.
  */
 
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
 public class JSONWeatherParserTest {
     private String weatherData;
 

@@ -38,12 +38,12 @@ public class DailyWeatherFragmentView extends Fragment {
         windSpeed = (TextView) view.findViewById(R.id.wind_speed);
         clouds = (TextView) view.findViewById(R.id.clouds);
 
-        temp.setText(controller.getTemp());
-        humidity.setText(controller.getHumidity());
-        tempMin.setText(controller.getTempMin());
-        tempMax.setText(controller.getTempMax());
-        windSpeed.setText(controller.getWindSpeed());
-        clouds.setText(controller.getClouds());
+        temp.setText("Temperature: " + controller.getTemp());
+        humidity.setText("Humidity: " + controller.getHumidity());
+        tempMin.setText("Minimum Temperature: " + controller.getTempMin());
+        tempMax.setText("Maximum Temperature: " + controller.getTempMax());
+        windSpeed.setText("Wind Speed: " + controller.getWindSpeed());
+        clouds.setText("Clouds: " + controller.getClouds());
 
         return view;
     }

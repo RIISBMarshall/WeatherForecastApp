@@ -22,7 +22,7 @@ public class APIHelper {
         InputStream is = null;
 
         try {
-            con = (HttpURLConnection) (new URL(BASE_URL + location + ",us&appid=" + api)).openConnection();
+            con = (HttpURLConnection) (new URL(BASE_URL + location + "&appid=" + api)).openConnection();
             con.setRequestMethod("GET");
             con.setDoInput(true);
             con.setDoOutput(true);
@@ -51,8 +51,6 @@ public class APIHelper {
             } catch (Throwable t) {
             }
         }
-
         return null;
-
     }
 }
