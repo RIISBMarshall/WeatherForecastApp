@@ -42,8 +42,12 @@ public class Controller {
 
     public String fetchWeatherData(String location){
         APIHelper apiHelper = new APIHelper();
-        System.out.println(apiHelper.fetchWeatherData(location));
         return apiHelper.fetchWeatherData(location);
+    }
+
+    public void setIconData(){
+        APIHelper apiHelper = new APIHelper();
+        weather.setIconData(apiHelper.getImage(weather.getIcon()));
     }
 
     public String getTemp() {
@@ -68,5 +72,13 @@ public class Controller {
 
     public String getClouds() {
         return weather.getClouds();
+    }
+
+    public byte[] getIconData() {
+        return weather.getIconData();
+    }
+
+    public String getLocationName() {
+        return weather.getLocationName();
     }
 }

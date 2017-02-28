@@ -68,10 +68,10 @@ public class ControllerTest {
                 "\"dt\":1427700245, \"id\":0, \"name\":\"Mountain View\", \"cod\":200}";
 
         controller.getDailyWeather(weatherData);
-        Assert.assertEquals("temp should be set to 285.68", "285.68", controller.getTemp());
+        Assert.assertEquals("temp should be set to 54.554", "54.554", controller.getTemp());
         Assert.assertEquals("humidity should be set to 74", "74", controller.getHumidity());
-        Assert.assertEquals("tempMin should be set to 284.82", "284.82", controller.getTempMin());
-        Assert.assertEquals("tempMax should be set to 286.48", "286.48", controller.getTempMax());
+        Assert.assertEquals("tempMin should be set to 53.006", "53.006", controller.getTempMin());
+        Assert.assertEquals("tempMax should be set to 55.994", "55.994", controller.getTempMax());
         Assert.assertEquals("windSpeed should be set to 0.96", "0.96", controller.getWindSpeed());
         Assert.assertEquals("clouds should be set to 0", "0", controller.getClouds());
     }
@@ -93,7 +93,7 @@ public class ControllerTest {
                 "\"dt\":1427700245, \"id\":0, \"name\":\"Mountain View\", \"cod\":200}";
 
         controller.getDailyWeather(weatherData);
-        Assert.assertEquals("temp should be set to 285.68", "285.68", controller.getTemp());
+        Assert.assertEquals("temp should be set to 54.554", "54.554", controller.getTemp());
     }
 
     @Test
@@ -125,7 +125,7 @@ public class ControllerTest {
 
         controller.getDailyWeather(weatherData);
 
-        Assert.assertEquals("tempMin should be set to 284.82", "284.82", controller.getTempMin());
+        Assert.assertEquals("tempMin should be set to 53.006", "53.006", controller.getTempMin());
     }
 
     @Test
@@ -141,7 +141,7 @@ public class ControllerTest {
 
         controller.getDailyWeather(weatherData);
 
-        Assert.assertEquals("tempMax should be set to 286.48", "286.48", controller.getTempMax());
+        Assert.assertEquals("tempMax should be set to 55.994", "55.994", controller.getTempMax());
     }
 
     @Test
@@ -174,5 +174,21 @@ public class ControllerTest {
         controller.getDailyWeather(weatherData);
 
         Assert.assertEquals("clouds should be set to 0", "0", controller.getClouds());
+    }
+
+    @Test
+    public void getLocationNameTest(){
+        String weatherData = "{\"coord\":{\"lon\":-122.09,\"lat\":37.39}," +
+                " \"sys\":{\"type\":3,\"id\":168940,\"message\":0.0297,\"country\":\"US\"," +
+                "\"sunrise\":1427723751,\"sunset\":1427768967}, \"weather\":[{\"id\":800,\"main\"" +
+                ":\"Clear\",\"description\":\"Sky is Clear\",\"icon\":\"01n\"}], " +
+                "\"base\":\"stations\", \"main\":{\"temp\":285.68,\"humidity\":74," +
+                "\"pressure\":1016.8,\"temp_min\":284.82,\"temp_max\":286.48}, " +
+                "\"wind\":{\"speed\":0.96,\"deg\":285.001}, \"clouds\":{\"all\":0}, " +
+                "\"dt\":1427700245, \"id\":0, \"name\":\"Mountain View\", \"cod\":200}";
+
+        controller.getDailyWeather(weatherData);
+
+        Assert.assertEquals("Mountain View", controller.getLocationName());
     }
 }

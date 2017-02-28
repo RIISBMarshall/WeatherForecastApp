@@ -6,12 +6,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.bmarshall.weatherforecastapp.R;
-import com.example.bmarshall.weatherforecastapp.model.PagerAdapter;
 import com.example.bmarshall.weatherforecastapp.controller.Controller;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
@@ -19,15 +18,19 @@ public class WeatherForecastView extends FragmentActivity {
 
     public Controller controller;
     private PagerAdapter mPagerAdapter;
+    private TextView locationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_weather_forecast);
+        locationTextView = (TextView) findViewById(R.id.locationtxt);
         controller = new Controller();
         String location = controller.getSavedLocation(this);
         String weatherData = controller.fetchWeatherData(location);
         controller.getDailyWeather(weatherData);
+        controller.setIconData();
+        locationTextView.setText(controller.getLocationName());
         this.initialisePaging();
     }
 

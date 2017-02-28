@@ -6,27 +6,29 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by bmarshall on 2/27/17.
- */
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class JSONWeatherParser {
+    private String locationName;
     private String temp;
     private String humidity;
     private String tempMin;
     private String tempMax;
     private String windSpeed;
     private String clouds;
+    private String icon;
 
     public Weather getDailyWeather(String data) throws JSONException {
         JSONObject jObj = new JSONObject(data);
 
         JSONObject mainObj = getObject("main", jObj);
 
-        temp = getString("temp", mainObj);
+        locationName = getString("name", jObj);
+        temp = convertFromKelToFar(getString("temp", mainObj));
         humidity = getString("humidity", mainObj);
-        tempMin = getString("temp_min", mainObj);
-        tempMax = getString("temp_max", mainObj);
+        tempMin = convertFromKelToFar(getString("temp_min", mainObj));
+        tempMax = convertFromKelToFar(getString("temp_max", mainObj));
 
         JSONObject wObj = getObject("wind", jObj);
 
@@ -36,15 +38,28 @@ public class JSONWeatherParser {
 
         clouds = getString("all", cObj);
 
-        return new Weather(temp, humidity, tempMin, tempMax, windSpeed, clouds);
+        JSONArray jArr = jObj.getJSONArray("weather");
+
+        JSONObject JSONWeather = jArr.getJSONObject(0);
+
+        icon = getString("icon", JSONWeather);
+
+        return new Weather(locationName, temp, humidity, tempMin, tempMax, windSpeed, clouds, icon);
     }
 
-    private static JSONObject getObject(String tagName, JSONObject jObj)  throws JSONException {
+    private static JSONObject getObject(String tagName, JSONObject jObj) throws JSONException {
         JSONObject subObj = jObj.getJSONObject(tagName);
         return subObj;
     }
 
     private static String getString(String tagName, JSONObject jObj) throws JSONException {
         return jObj.getString(tagName);
+    }
+
+    private String convertFromKelToFar(String kelvinTemp) {
+        NumberFormat numberFormat = new DecimalFormat("##.###");
+        Float kelTemp = Float.valueOf(kelvinTemp);
+        double farTemp = kelTemp * (9.0 / 5) - 459.67;
+        return numberFormat.format(farTemp);
     }
 }

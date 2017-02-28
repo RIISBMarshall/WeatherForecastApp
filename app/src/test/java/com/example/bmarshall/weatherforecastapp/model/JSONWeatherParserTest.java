@@ -37,11 +37,12 @@ public class JSONWeatherParserTest {
         JSONWeatherParser jsonWeatherParser = new JSONWeatherParser();
         Weather weather = jsonWeatherParser.getDailyWeather(weatherData);
 
-        Assert.assertEquals("temp should be set to 285.68", "285.68", weather.getTemp());
+        Assert.assertEquals("temp should be set to 54.554", "54.554", weather.getTemp());
         Assert.assertEquals("humidity should be set to 74", "74", weather.getHumidity());
-        Assert.assertEquals("tempMin should be set to 284.82", "284.82", weather.getTempMin());
-        Assert.assertEquals("tempMax should be set to 286.48", "286.48", weather.getTempMax());
+        Assert.assertEquals("tempMin should be set to 53.006", "53.006", weather.getTempMin());
+        Assert.assertEquals("tempMax should be set to 55.994", "55.994", weather.getTempMax());
         Assert.assertEquals("windSpeed should be set to 0.96", "0.96", weather.getWindSpeed());
         Assert.assertEquals("clouds should be set to 0", "0", weather.getClouds());
+        Assert.assertEquals("icon should be set to 01n", "01n", weather.getIcon());
     }
 }

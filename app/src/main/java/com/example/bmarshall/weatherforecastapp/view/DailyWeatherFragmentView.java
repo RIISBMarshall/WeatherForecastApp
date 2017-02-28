@@ -1,10 +1,13 @@
 package com.example.bmarshall.weatherforecastapp.view;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +22,7 @@ public class DailyWeatherFragmentView extends Fragment {
     private TextView tempMax;
     private TextView windSpeed;
     private TextView clouds;
+    private ImageView imgView;
     private Controller controller;
 
     @Override
@@ -31,12 +35,23 @@ public class DailyWeatherFragmentView extends Fragment {
         WeatherForecastView weatherForecastView = (WeatherForecastView) getActivity();
         controller = weatherForecastView.controller;
 
+        imgView = (ImageView) view.findViewById(R.id.imgview);
         temp = (TextView) view.findViewById(R.id.temp);
         humidity = (TextView) view.findViewById(R.id.humidity);
         tempMin = (TextView) view.findViewById(R.id.temp_min);
         tempMax = (TextView) view.findViewById(R.id.temp_max);
         windSpeed = (TextView) view.findViewById(R.id.wind_speed);
         clouds = (TextView) view.findViewById(R.id.clouds);
+
+        imgView.getLayoutParams().width = 400;
+        imgView.getLayoutParams().height = 400;
+
+        byte[] iconData = controller.getIconData();
+
+        if (iconData != null && iconData.length > 0) {
+            Bitmap img = BitmapFactory.decodeByteArray(iconData, 0, iconData.length);
+            imgView.setImageBitmap(img);
+        }
 
         temp.setText("Temperature: " + controller.getTemp());
         humidity.setText("Humidity: " + controller.getHumidity());

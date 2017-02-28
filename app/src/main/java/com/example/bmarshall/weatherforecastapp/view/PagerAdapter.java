@@ -1,4 +1,4 @@
-package com.example.bmarshall.weatherforecastapp.model;
+package com.example.bmarshall.weatherforecastapp.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
