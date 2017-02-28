@@ -13,18 +13,27 @@ import java.net.URL;
 
 public class APIHelper {
 
-    private static String BASE_URL = "http://api.openweathermap.org/data/2.5/weather?zip=";
+    private static String DAY_URL = "http://api.openweathermap.org/data/2.5/weather?zip=";
+    private static String WEEK_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?zip=";
     private static String IMG_URL = "http://openweathermap.org/img/w/";
 
     private String api = "ab91657c8c50ed23f0e6041b14b7d71f";
 
-    public String fetchWeatherData(String location) {
+    public String fetchWeatherData(String location, String dayOrWeek) {
 
         HttpURLConnection con = null;
         InputStream is = null;
 
+        String baseURL;
+
+        if(dayOrWeek.equals("day")){
+            baseURL = DAY_URL;
+        } else{
+            baseURL = WEEK_URL;
+        }
+
         try {
-            con = (HttpURLConnection) (new URL(BASE_URL + location + "&appid=" + api)).openConnection();
+            con = (HttpURLConnection) (new URL(baseURL + location + "&appid=" + api)).openConnection();
             con.setRequestMethod("GET");
             con.setDoInput(true);
             con.setDoOutput(true);

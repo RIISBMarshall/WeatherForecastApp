@@ -9,8 +9,11 @@ import com.example.bmarshall.weatherforecastapp.model.Weather;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 public class Controller {
     private Weather weather;
+    private ArrayList<Weather> weeksWeather;
 
     public Controller() {
 
@@ -40,9 +43,19 @@ public class Controller {
         }
     }
 
-    public String fetchWeatherData(String location){
+    public void getWeeksWeather(String weatherData){
+        JSONWeatherParser jSONWeatherParser = new JSONWeatherParser();
+            weeksWeather = jSONWeatherParser.getWeeksWeather(weatherData);
+    }
+
+    public String fetchDailyWeatherData(String location){
         APIHelper apiHelper = new APIHelper();
-        return apiHelper.fetchWeatherData(location);
+        return apiHelper.fetchWeatherData(location, "day");
+    }
+
+    public String fetchWeeklyWeatherData(String location){
+        APIHelper apiHelper = new APIHelper();
+        return apiHelper.fetchWeatherData(location, "week");
     }
 
     public void setIconData(){
@@ -80,5 +93,26 @@ public class Controller {
 
     public String getLocationName() {
         return weather.getLocationName();
+    }
+
+    public String getWeekdayMaxTemp(int day){
+        return weeksWeather.get(day).getTempMax();
+    }
+
+    public String getWeekdayMinTemp(int day){
+        return weeksWeather.get(day).getTempMin();
+    }
+
+    public String getWeekdayHumidity(int day){
+        return weeksWeather.get(day).getHumidity();
+    }
+
+    public String getWeekdayWindSpeed(int day){
+        return weeksWeather.get(day).getWindSpeed();
+    }
+
+    public void setWeekdayIconData(int day){
+        APIHelper apiHelper = new APIHelper();
+        weeksWeather.get(day).setIconData(apiHelper.getImage(weeksWeather.get(day).getIcon()));
     }
 }

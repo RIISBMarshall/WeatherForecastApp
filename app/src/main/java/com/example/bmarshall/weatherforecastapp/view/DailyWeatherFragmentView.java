@@ -58,7 +58,7 @@ public class DailyWeatherFragmentView extends Fragment {
         tempMin.setText("Minimum Temperature: " + controller.getTempMin());
         tempMax.setText("Maximum Temperature: " + controller.getTempMax());
         windSpeed.setText("Wind Speed: " + controller.getWindSpeed());
-        clouds.setText("Clouds: " + controller.getClouds());
+        clouds.setText("Clouds: " + controller.getClouds() + "%");
 
         return view;
     }

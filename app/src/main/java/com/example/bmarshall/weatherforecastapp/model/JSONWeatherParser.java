@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 public class JSONWeatherParser {
     private String locationName;
@@ -47,6 +48,11 @@ public class JSONWeatherParser {
         return new Weather(locationName, temp, humidity, tempMin, tempMax, windSpeed, clouds, icon);
     }
 
+    public ArrayList getWeeksWeather(String data){
+        ArrayList<Weather> weeksWeather = new ArrayList<>(5);
+        return weeksWeather;
+    }
+
     private static JSONObject getObject(String tagName, JSONObject jObj) throws JSONException {
         JSONObject subObj = jObj.getJSONObject(tagName);
         return subObj;
@@ -57,7 +63,7 @@ public class JSONWeatherParser {
     }
 
     private String convertFromKelToFar(String kelvinTemp) {
-        NumberFormat numberFormat = new DecimalFormat("##.###");
+        NumberFormat numberFormat = new DecimalFormat("##.##");
         Float kelTemp = Float.valueOf(kelvinTemp);
         double farTemp = kelTemp * (9.0 / 5) - 459.67;
         return numberFormat.format(farTemp);

@@ -27,10 +27,15 @@ public class WeatherForecastView extends FragmentActivity {
         locationTextView = (TextView) findViewById(R.id.locationtxt);
         controller = new Controller();
         String location = controller.getSavedLocation(this);
-        String weatherData = controller.fetchWeatherData(location);
+
+        String weatherData = controller.fetchDailyWeatherData(location);
         controller.getDailyWeather(weatherData);
         controller.setIconData();
         locationTextView.setText(controller.getLocationName());
+
+        weatherData = controller.fetchWeeklyWeatherData(location);
+        controller.getWeeksWeather(weatherData);
+
         this.initialisePaging();
     }
 
