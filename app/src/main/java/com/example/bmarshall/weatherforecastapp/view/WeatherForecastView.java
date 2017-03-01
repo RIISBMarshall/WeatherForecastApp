@@ -47,22 +47,25 @@ public class WeatherForecastView extends FragmentActivity {
 
         controller.setWeeksWeatherIconData();
 
-        this.initialisePaging();
-
+        System.out.println("before");
         if(controller.weatherIsBad()){
+            System.out.println("after");
             String longText = "Warning: Bad weather in your selected area!";
             Intent intent = new Intent(this, WeatherForecastView.class);
             PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
             Notification n  = new Notification.Builder(this)
                     .setContentTitle("BAD WEATHER WARNING!!")
                     .setContentText("Subject")
+                    .setSmallIcon(R.drawable.icon)
                     .setContentIntent(pIntent)
                     .setAutoCancel(true)
                     .setStyle(new Notification.BigTextStyle().bigText(longText))
-                    .addAction(0, "More", pIntent).build();
+                    .addAction(R.drawable.icon, "More", pIntent).build();
             NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
             notificationManager.notify(0, n);
         }
+
+        this.initialisePaging();
     }
 
     public void onClickChangeLocationButton(View v) {

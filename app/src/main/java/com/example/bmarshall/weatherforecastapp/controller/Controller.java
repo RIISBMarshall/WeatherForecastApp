@@ -43,29 +43,29 @@ public class Controller {
         }
     }
 
-    public void getWeeksWeather(String weatherData){
+    public void getWeeksWeather(String weatherData) {
         JSONWeatherParser jSONWeatherParser = new JSONWeatherParser();
-            weeksWeather = jSONWeatherParser.getWeeksWeather(weatherData);
+        weeksWeather = jSONWeatherParser.getWeeksWeather(weatherData);
     }
 
-    public String fetchDailyWeatherData(String location){
+    public String fetchDailyWeatherData(String location) {
         APIHelper apiHelper = new APIHelper();
         return apiHelper.fetchWeatherData(location, "day");
     }
 
-    public String fetchWeeklyWeatherData(String location){
+    public String fetchWeeklyWeatherData(String location) {
         APIHelper apiHelper = new APIHelper();
         return apiHelper.fetchWeatherData(location, "week");
     }
 
-    public void setIconData(){
+    public void setIconData() {
         APIHelper apiHelper = new APIHelper();
         weather.setIconData(apiHelper.getImage(weather.getIcon()));
     }
 
-    public void setWeeksWeatherIconData(){
+    public void setWeeksWeatherIconData() {
         APIHelper apiHelper = new APIHelper();
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             weeksWeather.get(i).setIconData(apiHelper.getImage(weeksWeather.get(i).getIcon()));
         }
     }
@@ -102,27 +102,27 @@ public class Controller {
         return weather.getLocationName();
     }
 
-    public String getWeekdayMaxTemp(int day){
+    public String getWeekdayMaxTemp(int day) {
         return weeksWeather.get(day).getTempMax();
     }
 
-    public String getWeekdayMinTemp(int day){
+    public String getWeekdayMinTemp(int day) {
         return weeksWeather.get(day).getTempMin();
     }
 
-    public String getWeekdayHumidity(int day){
+    public String getWeekdayHumidity(int day) {
         return weeksWeather.get(day).getHumidity();
     }
 
-    public String getWeekdayWindSpeed(int day){
+    public String getWeekdayWindSpeed(int day) {
         return weeksWeather.get(day).getWindSpeed();
     }
 
-    public byte[] getWeekdayIconData(int day){
+    public byte[] getWeekdayIconData(int day) {
         return weeksWeather.get(day).getIconData();
     }
 
-    public void setWeekdayIconData(int day){
+    public void setWeekdayIconData(int day) {
         APIHelper apiHelper = new APIHelper();
         weeksWeather.get(day).setIconData(apiHelper.getImage(weeksWeather.get(day).getIcon()));
     }
@@ -131,7 +131,10 @@ public class Controller {
         return weeksWeather;
     }
 
-    public boolean weatherIsBad(){
+    public boolean weatherIsBad() {
+        if (Double.valueOf(weather.getTemp()) < 10) {
+            return true;
+        }
         return false;
     }
 }
