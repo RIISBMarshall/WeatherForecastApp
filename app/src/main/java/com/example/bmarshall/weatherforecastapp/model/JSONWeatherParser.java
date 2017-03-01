@@ -48,8 +48,44 @@ public class JSONWeatherParser {
         return new Weather(locationName, temp, humidity, tempMin, tempMax, windSpeed, clouds, icon);
     }
 
-    public ArrayList getWeeksWeather(String data){
+    public ArrayList getWeeksWeather(String data) {
         ArrayList<Weather> weeksWeather = new ArrayList<>(5);
+
+        JSONObject jObj = null;
+        try {
+            jObj = new JSONObject(data);
+
+
+            JSONArray list = jObj.getJSONArray("list");
+
+
+            for (int i = 0; i < 5; i++) {
+
+                JSONObject item = list.getJSONObject(i);
+
+                JSONObject temp = item.getJSONObject("temp");
+
+                tempMax = convertFromKelToFar(temp.getString("max"));
+
+                tempMin = convertFromKelToFar(temp.getString("min"));
+
+                JSONArray weatherList = item.getJSONArray("weather");
+
+                JSONObject weatherItem = weatherList.getJSONObject(0);
+
+                icon = weatherItem.getString("icon");
+
+                windSpeed = item.getString("speed");
+
+                humidity = item.getString("humidity");
+
+                weeksWeather.add(i, new Weather(tempMax, tempMin, windSpeed, humidity, icon));
+            }
+
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return weeksWeather;
     }
 

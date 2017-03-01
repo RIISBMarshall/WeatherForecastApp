@@ -63,6 +63,13 @@ public class Controller {
         weather.setIconData(apiHelper.getImage(weather.getIcon()));
     }
 
+    public void setWeeksWeatherIconData(){
+        APIHelper apiHelper = new APIHelper();
+        for (int i = 0; i < 5; i++){
+            weeksWeather.get(i).setIconData(apiHelper.getImage(weeksWeather.get(i).getIcon()));
+        }
+    }
+
     public String getTemp() {
         return weather.getTemp();
     }
@@ -111,8 +118,16 @@ public class Controller {
         return weeksWeather.get(day).getWindSpeed();
     }
 
+    public byte[] getWeekdayIconData(int day){
+        return weeksWeather.get(day).getIconData();
+    }
+
     public void setWeekdayIconData(int day){
         APIHelper apiHelper = new APIHelper();
         weeksWeather.get(day).setIconData(apiHelper.getImage(weeksWeather.get(day).getIcon()));
+    }
+
+    public ArrayList<Weather> getWeeksWeatherArray() {
+        return weeksWeather;
     }
 }

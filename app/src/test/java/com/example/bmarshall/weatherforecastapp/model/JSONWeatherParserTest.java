@@ -72,10 +72,10 @@ public class JSONWeatherParserTest {
         JSONWeatherParser jsonWeatherParser = new JSONWeatherParser();
         Weather weather = jsonWeatherParser.getDailyWeather(weatherData);
 
-        Assert.assertEquals("temp should be set to 54.554", "54.554", weather.getTemp());
+        Assert.assertEquals("temp should be set to 54.55", "54.55", weather.getTemp());
         Assert.assertEquals("humidity should be set to 74", "74", weather.getHumidity());
-        Assert.assertEquals("tempMin should be set to 53.006", "53.006", weather.getTempMin());
-        Assert.assertEquals("tempMax should be set to 55.994", "55.994", weather.getTempMax());
+        Assert.assertEquals("tempMin should be set to 53.01", "53.01", weather.getTempMin());
+        Assert.assertEquals("tempMax should be set to 55.99", "55.99", weather.getTempMax());
         Assert.assertEquals("windSpeed should be set to 0.96", "0.96", weather.getWindSpeed());
         Assert.assertEquals("clouds should be set to 0", "0", weather.getClouds());
         Assert.assertEquals("icon should be set to 01n", "01n", weather.getIcon());
@@ -87,10 +87,10 @@ public class JSONWeatherParserTest {
         ArrayList<Weather> weeksWeather;
         weeksWeather = jsonWeatherParser.getWeeksWeather(weeklyWeatherData);
 
-        Assert.assertEquals("to be determined", weeksWeather.get(0).getHumidity());
-        Assert.assertEquals("to be determined", weeksWeather.get(0).getTempMin());
-        Assert.assertEquals("to be determined", weeksWeather.get(0).getTempMax());
-        Assert.assertEquals("to be determined", weeksWeather.get(0).getWindSpeed());
-        Assert.assertEquals("to be determined", weeksWeather.get(0).getIcon());
+        Assert.assertEquals("75", weeksWeather.get(0).getHumidity());
+        Assert.assertEquals("48.2", weeksWeather.get(0).getTempMin());
+        Assert.assertEquals("54.23", weeksWeather.get(0).getTempMax());
+        Assert.assertEquals("4.61", weeksWeather.get(0).getWindSpeed());
+        Assert.assertEquals("10d", weeksWeather.get(0).getIcon());
     }
 }

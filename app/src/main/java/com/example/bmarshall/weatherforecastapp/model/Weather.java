@@ -28,6 +28,14 @@ public class Weather {
         this.icon = icon;
     }
 
+    public Weather(String tempMax, String tempMin, String windSpeed, String humidity, String icon){
+        this.tempMax = tempMax;
+        this.tempMin = tempMin;
+        this.windSpeed = windSpeed;
+        this.humidity = humidity;
+        this.icon = icon;
+    }
+
     public String getTemp() {
         return temp;
     }

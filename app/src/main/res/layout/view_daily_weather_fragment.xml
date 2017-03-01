@@ -11,6 +11,11 @@
     android:orientation="vertical"
     tools:context="com.example.bmarshall.weatherforecastapp.view.DailyWeatherFragmentView">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CURRENT WEATHER"/>
+
     <ImageView
         android:id="@+id/imgview"
         android:layout_width="wrap_content"
@@ -23,16 +28,6 @@
 
     <TextView
         android:id="@+id/humidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/temp_min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/temp_max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

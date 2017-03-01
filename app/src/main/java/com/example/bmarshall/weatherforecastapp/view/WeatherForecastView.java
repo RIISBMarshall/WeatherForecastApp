@@ -1,6 +1,7 @@
 package com.example.bmarshall.weatherforecastapp.view;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -35,6 +36,13 @@ public class WeatherForecastView extends FragmentActivity {
 
         weatherData = controller.fetchWeeklyWeatherData(location);
         controller.getWeeksWeather(weatherData);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        controller.setWeeksWeatherIconData();
 
         this.initialisePaging();
     }

@@ -17,6 +17,7 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by bmarshall on 2/24/17.
@@ -99,57 +100,57 @@ public class ControllerTest {
     }
 
     @Test
-    public void getDailyWeather() {
+    public void getDailyWeatherTest() {
         controller.getDailyWeather(weatherData);
-        Assert.assertEquals("temp should be set to 54.554", "54.554", controller.getTemp());
+        Assert.assertEquals("temp should be set to 54.55", "54.55", controller.getTemp());
         Assert.assertEquals("humidity should be set to 74", "74", controller.getHumidity());
-        Assert.assertEquals("tempMin should be set to 53.006", "53.006", controller.getTempMin());
-        Assert.assertEquals("tempMax should be set to 55.994", "55.994", controller.getTempMax());
+        Assert.assertEquals("tempMin should be set to 53.01", "53.01", controller.getTempMin());
+        Assert.assertEquals("tempMax should be set to 55.99", "55.99", controller.getTempMax());
         Assert.assertEquals("windSpeed should be set to 0.96", "0.96", controller.getWindSpeed());
         Assert.assertEquals("clouds should be set to 0", "0", controller.getClouds());
     }
 
     @Test
-    public void fetchWeatherData(){
+    public void fetchWeatherDataTest(){
         //Cant test API calls
     }
 
     @Test
-    public void getTemp() {
+    public void getTempTest() {
         controller.getDailyWeather(weatherData);
-        Assert.assertEquals("temp should be set to 54.554", "54.554", controller.getTemp());
+        Assert.assertEquals("temp should be set to 54.55", "54.55", controller.getTemp());
     }
 
     @Test
-    public void getHumidity() {
+    public void getHumidityTest() {
         controller.getDailyWeather(weatherData);
 
         Assert.assertEquals("humidity should be set to 74", "74", controller.getHumidity());
     }
 
     @Test
-    public void getTempMin() {
+    public void getTempMinTest() {
         controller.getDailyWeather(weatherData);
 
-        Assert.assertEquals("tempMin should be set to 53.006", "53.006", controller.getTempMin());
+        Assert.assertEquals("tempMin should be set to 53.01", "53.01", controller.getTempMin());
     }
 
     @Test
-    public void getTempMax() {
+    public void getTempMaxTest() {
         controller.getDailyWeather(weatherData);
 
-        Assert.assertEquals("tempMax should be set to 55.994", "55.994", controller.getTempMax());
+        Assert.assertEquals("tempMax should be set to 55.99", "55.99", controller.getTempMax());
     }
 
     @Test
-    public void getWindSpeed() {
+    public void getWindSpeedTest() {
         controller.getDailyWeather(weatherData);
 
         Assert.assertEquals("windSpeed should be set to 0.96", "0.96", controller.getWindSpeed());
     }
 
     @Test
-    public void getClouds() {
+    public void getCloudsTest() {
         controller.getDailyWeather(weatherData);
 
         Assert.assertEquals("clouds should be set to 0", "0", controller.getClouds());
@@ -165,24 +166,31 @@ public class ControllerTest {
     @Test
     public void getWeekdayMaxTempTest(){
         controller.getWeeksWeather(weeklyWeatherData);
-        Assert.assertEquals("tobedetermined", controller.getWeekdayMaxTemp(0));
+        Assert.assertEquals("54.23", controller.getWeekdayMaxTemp(0));
     }
 
     @Test
     public void getWeekdayMinTempTest(){
         controller.getWeeksWeather(weeklyWeatherData);
-        Assert.assertEquals("tobedetermined", controller.getWeekdayMinTemp(0));
+        Assert.assertEquals("48.2", controller.getWeekdayMinTemp(0));
     }
 
     @Test
     public void getWeekdayHumidityTest(){
         controller.getWeeksWeather(weeklyWeatherData);
-        Assert.assertEquals("tobedetermined", controller.getWeekdayHumidity(0));
+        Assert.assertEquals("75", controller.getWeekdayHumidity(0));
     }
 
     @Test
     public void getWeekdayWindSpeedTest(){
         controller.getWeeksWeather(weeklyWeatherData);
-        Assert.assertEquals("tobedetermined", controller.getWeekdayWindSpeed(0));
+        Assert.assertEquals("4.61", controller.getWeekdayWindSpeed(0));
+    }
+
+    @Test
+    public void getWeeksWeatherTest() {
+        controller.getWeeksWeather(weeklyWeatherData);
+        ArrayList<Weather> weeksWeatherArray = controller.getWeeksWeatherArray();
+        Assert.assertEquals("4.61", weeksWeatherArray.get(0).getWindSpeed());
     }
 }
