@@ -130,4 +130,8 @@ public class Controller {
     public ArrayList<Weather> getWeeksWeatherArray() {
         return weeksWeather;
     }
+
+    public boolean weatherIsBad(){
+        return false;
+    }
 }
