@@ -15,7 +15,6 @@ import com.example.bmarshall.weatherforecastapp.controller.Controller;
 import java.io.IOException;
 
 public class LocationSelectionView extends AppCompatActivity {
-    private String zipCode;
     public Controller controller;
     private EditText zipCodeEditText;
 
@@ -32,7 +31,7 @@ public class LocationSelectionView extends AppCompatActivity {
     }
 
     public void onClickGoButton(View v) throws IllegalAccessException, IOException, InstantiationException {
-        zipCode = String.valueOf(zipCodeEditText.getText());
+        String zipCode = String.valueOf(zipCodeEditText.getText());
         if (controller.checkValid(zipCode)) {
             controller.saveLocation(zipCode, this);
             Intent intent = new Intent(LocationSelectionView.this, WeatherForecastView.class);

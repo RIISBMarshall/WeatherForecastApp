@@ -4,7 +4,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -21,7 +20,6 @@ import java.util.Vector;
 public class WeatherForecastView extends FragmentActivity {
 
     public Controller controller;
-    private PagerAdapter mPagerAdapter;
     private TextView locationTextView;
 
     @Override
@@ -30,24 +28,34 @@ public class WeatherForecastView extends FragmentActivity {
         setContentView(R.layout.view_weather_forecast);
         locationTextView = (TextView) findViewById(R.id.locationtxt);
         controller = new Controller();
+
+        getAllWeatherData();
+
+        showBadWeatherNotification();
+
+        initialisePaging();
+    }
+
+    public void onClickChangeLocationButton(View v) {
+        controller.saveLocation("bad location", this);
+        Intent intent = new Intent(WeatherForecastView.this, LocationSelectionView.class);
+        startActivity(intent);
+    }
+
+    public void getAllWeatherData(){
         String location = controller.getSavedLocation(this);
 
         String weatherData = controller.fetchDailyWeatherData(location);
         controller.getDailyWeather(weatherData);
-        controller.setIconData();
         locationTextView.setText(controller.getLocationName());
 
         weatherData = controller.fetchWeeklyWeatherData(location);
         controller.getWeeksWeather(weatherData);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        controller.setIconData();
         controller.setWeeksWeatherIconData();
+    }
 
-        System.out.println("before");
+    public void showBadWeatherNotification(){
         if(controller.weatherIsBad()){
             System.out.println("after");
             String longText = "Warning: Bad weather in your selected area!";
@@ -64,23 +72,14 @@ public class WeatherForecastView extends FragmentActivity {
             NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
             notificationManager.notify(0, n);
         }
-
-        this.initialisePaging();
-    }
-
-    public void onClickChangeLocationButton(View v) {
-        controller.saveLocation("bad location", this);
-        Intent intent = new Intent(WeatherForecastView.this, LocationSelectionView.class);
-        startActivity(intent);
     }
 
     public void initialisePaging() {
         List<Fragment> fragments = new Vector<Fragment>();
         fragments.add(Fragment.instantiate(this, DailyWeatherFragmentView.class.getName()));
         fragments.add(Fragment.instantiate(this, WeeklyWeatherFragmentView.class.getName()));
-        this.mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
-        //
+        PagerAdapter mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
         ViewPager pager = (ViewPager) super.findViewById(R.id.pager);
-        pager.setAdapter(this.mPagerAdapter);
+        pager.setAdapter(mPagerAdapter);
     }
 }

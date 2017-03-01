@@ -1,6 +1,7 @@
 package com.example.bmarshall.weatherforecastapp.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -20,9 +21,11 @@ import java.util.ArrayList;
  */
 
 public class WeeklyWeatherAdapter extends ArrayAdapter<Weather> {
+    private Context context;
 
     public WeeklyWeatherAdapter(Context context, ArrayList<Weather> weeksWeather) {
         super(context, 0, weeksWeather);
+        this.context = context;
     }
 
     @Override
@@ -48,35 +51,10 @@ public class WeeklyWeatherAdapter extends ArrayAdapter<Weather> {
             iconView.setImageBitmap(img);
         }
 
-        maxTemp.setText("high: " + weather.getTempMax());
-        minTemp.setText("low: " + weather.getTempMin());
-        humid.setText("humidity: " + weather.getHumidity());
-        speedWind.setText("windspeed: " + weather.getWindSpeed());
+        maxTemp.setText( context.getString(R.string.high) + " " + weather.getTempMax());
+        minTemp.setText(context.getString(R.string.low) + " " +  weather.getTempMin());
+        humid.setText(context.getString(R.string.humidity) + " " + weather.getHumidity());
+        speedWind.setText(context.getString(R.string.windspeed) + " " + weather.getWindSpeed());
         return convertView;
     }
-
-    /*<ImageView
-        android:id="@+id/icon_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/max_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/min_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/humid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/speed_wind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />*/
 }

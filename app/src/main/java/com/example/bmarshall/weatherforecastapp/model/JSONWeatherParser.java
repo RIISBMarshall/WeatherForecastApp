@@ -20,30 +20,34 @@ public class JSONWeatherParser {
     private String clouds;
     private String icon;
 
-    public Weather getDailyWeather(String data) throws JSONException {
-        JSONObject jObj = new JSONObject(data);
+    public Weather getDailyWeather(String data) {
+        try {
+            JSONObject jObj = new JSONObject(data);
 
-        JSONObject mainObj = getObject("main", jObj);
+            JSONObject mainObj = getObject("main", jObj);
 
-        locationName = getString("name", jObj);
-        temp = convertFromKelToFar(getString("temp", mainObj));
-        humidity = getString("humidity", mainObj);
-        tempMin = convertFromKelToFar(getString("temp_min", mainObj));
-        tempMax = convertFromKelToFar(getString("temp_max", mainObj));
+            locationName = getString("name", jObj);
+            temp = convertFromKelToFar(getString("temp", mainObj));
+            humidity = getString("humidity", mainObj);
+            tempMin = convertFromKelToFar(getString("temp_min", mainObj));
+            tempMax = convertFromKelToFar(getString("temp_max", mainObj));
 
-        JSONObject wObj = getObject("wind", jObj);
+            JSONObject wObj = getObject("wind", jObj);
 
-        windSpeed = getString("speed", wObj);
+            windSpeed = getString("speed", wObj);
 
-        JSONObject cObj = getObject("clouds", jObj);
+            JSONObject cObj = getObject("clouds", jObj);
 
-        clouds = getString("all", cObj);
+            clouds = getString("all", cObj);
 
-        JSONArray jArr = jObj.getJSONArray("weather");
+            JSONArray jArr = jObj.getJSONArray("weather");
 
-        JSONObject JSONWeather = jArr.getJSONObject(0);
+            JSONObject JSONWeather = jArr.getJSONObject(0);
 
-        icon = getString("icon", JSONWeather);
+            icon = getString("icon", JSONWeather);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         return new Weather(locationName, temp, humidity, tempMin, tempMax, windSpeed, clouds, icon);
     }
@@ -82,7 +86,7 @@ public class JSONWeatherParser {
                 weeksWeather.add(i, new Weather(tempMax, tempMin, windSpeed, humidity, icon));
             }
 
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 

@@ -36,11 +36,8 @@ public class Controller {
 
     public void getDailyWeather(String weatherData) {
         JSONWeatherParser jSONWeatherParser = new JSONWeatherParser();
-        try {
             weather = jSONWeatherParser.getDailyWeather(weatherData);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void getWeeksWeather(String weatherData) {

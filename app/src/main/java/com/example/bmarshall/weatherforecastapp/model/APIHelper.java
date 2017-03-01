@@ -13,13 +13,10 @@ import java.net.URL;
 
 public class APIHelper {
 
-    private static String DAY_URL = "http://api.openweathermap.org/data/2.5/weather?zip=";
-    private static String WEEK_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?zip=";
-    private static String IMG_URL = "http://openweathermap.org/img/w/";
-
-    private String api = "ab91657c8c50ed23f0e6041b14b7d71f";
-
     public String fetchWeatherData(String location, String dayOrWeek) {
+        final String DAY_URL = "http://api.openweathermap.org/data/2.5/weather?zip=";
+        final String WEEK_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?zip=";
+        final String API = "ab91657c8c50ed23f0e6041b14b7d71f";
 
         HttpURLConnection con = null;
         InputStream is = null;
@@ -33,7 +30,7 @@ public class APIHelper {
         }
 
         try {
-            con = (HttpURLConnection) (new URL(baseURL + location + "&appid=" + api)).openConnection();
+            con = (HttpURLConnection) (new URL(baseURL + location + "&appid=" + API)).openConnection();
             con.setRequestMethod("GET");
             con.setDoInput(true);
             con.setDoOutput(true);
@@ -67,6 +64,7 @@ public class APIHelper {
     public byte[] getImage(String code) {
         HttpURLConnection con = null;
         InputStream is = null;
+        final String IMG_URL = "http://openweathermap.org/img/w/";
         try {
             con = (HttpURLConnection) (new URL(IMG_URL + code + ".png")).openConnection();
             con.setRequestMethod("GET");

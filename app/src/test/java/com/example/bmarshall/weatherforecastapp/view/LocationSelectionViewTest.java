@@ -38,12 +38,12 @@ public class LocationSelectionViewTest {
 
     @Test
     public void onClickGoButtonTest() throws IllegalAccessException, IOException, InstantiationException {
-        zipCodeEditText.setText("48310");
+        zipCodeEditText.setText(locationSelectionView.getString(R.string.goodzip));
         goButton.callOnClick();
         Assert.assertEquals("Saved Location should be equal to valid location entered",
                 zipCodeEditText.getText(), locationSelectionView.controller.getSavedLocation(locationSelectionView));
 
-        zipCodeEditText.setText("483105");
+        zipCodeEditText.setText(locationSelectionView.getString(R.string.badzip));
         goButton.callOnClick();
         Assert.assertNotSame("Saved Location should not equal invalid location entered",
                 zipCodeEditText.getText(), locationSelectionView.controller.getSavedLocation(locationSelectionView));

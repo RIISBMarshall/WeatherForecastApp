@@ -42,6 +42,12 @@ public class DailyWeatherFragmentView extends Fragment {
         imgView.getLayoutParams().width = 400;
         imgView.getLayoutParams().height = 400;
 
+        showCurrentWeather();
+
+        return view;
+    }
+
+    public void showCurrentWeather(){
         byte[] iconData = controller.getIconData();
 
         if (iconData != null && iconData.length > 0) {
@@ -49,11 +55,9 @@ public class DailyWeatherFragmentView extends Fragment {
             imgView.setImageBitmap(img);
         }
 
-        temp.setText("Temperature: " + controller.getTemp());
-        humidity.setText("Humidity: " + controller.getHumidity());
-        windSpeed.setText("Wind Speed: " + controller.getWindSpeed());
-        clouds.setText("Clouds: " + controller.getClouds() + "%");
-
-        return view;
+        temp.setText( getString(R.string.temperature) + " " + controller.getTemp());
+        humidity.setText(getString(R.string.humidity) + " " + controller.getHumidity());
+        windSpeed.setText(getString(R.string.windspeed) + " " + controller.getWindSpeed());
+        clouds.setText(getString(R.string.clouds) + " " + controller.getClouds() + "%");
     }
 }

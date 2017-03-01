@@ -3,5 +3,20 @@
     <string name="location_hint">Zip Code</string>
     <string name="go">Go</string>
     <string name="enter_location">Enter location to view weather</string>
+
     <string name="change_location">Change Location</string>
+    <string name="temperature">Temperature:</string>
+    <string name="humidity">Humidity:</string>
+    <string name="windspeed">Windspeed:</string>
+    <string name="clouds">Clouds:</string>
+    <string name="high">High:</string>
+    <string name="low">Low:</string>
+
+    <string name="current_weather">CURRENT WEATHER</string>
+    <string name="five_day_forecast">5 DAY FORECAST</string>
+
+    <string name="goodzip">48310</string>
+    <string name="badzip">4965gh</string>
+
+
 </resources>
