@@ -1,9 +1,6 @@
 package com.example.bmarshall.weatherforecastapp.controller;
 
 import com.example.bmarshall.weatherforecastapp.BuildConfig;
-import com.example.bmarshall.weatherforecastapp.controller.Controller;
-import com.example.bmarshall.weatherforecastapp.model.APIHelper;
-import com.example.bmarshall.weatherforecastapp.model.JSONWeatherParser;
 import com.example.bmarshall.weatherforecastapp.model.Weather;
 import com.example.bmarshall.weatherforecastapp.view.LocationSelectionView;
 
@@ -16,12 +13,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-/**
- * Created by bmarshall on 2/24/17.
- */
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
@@ -33,7 +25,7 @@ public class ControllerTest {
     private String badWeather;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         controller = new Controller();
         locationSelectionView = Robolectric.buildActivity(LocationSelectionView.class).create().get();
         weatherData = "{\"coord\":{\"lon\":-122.09,\"lat\":37.39}," +
@@ -88,7 +80,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void checkValidTest(){
+    public void checkValidTest() {
         String validEntry = "48310";
         Assert.assertEquals("valid entry should return true", true, controller.checkValid(validEntry));
         String invalidEntry = "4831";
@@ -96,14 +88,14 @@ public class ControllerTest {
     }
 
     @Test
-    public void saveLocationTest() throws IllegalAccessException, IOException, InstantiationException {
+    public void saveLocationTest() {
         String location = "48310";
         controller.saveLocation(location, locationSelectionView);
         Assert.assertEquals("saveLocation should save the location we enter", location, controller.getSavedLocation(locationSelectionView));
     }
 
     @Test
-    public void getSavedLocationTest() throws IllegalAccessException, IOException, InstantiationException {
+    public void getSavedLocationTest() {
         String location = "48310";
         controller.saveLocation(location, locationSelectionView);
         Assert.assertEquals("getSavedLocation should return the location we save", location, controller.getSavedLocation(locationSelectionView));
@@ -114,15 +106,8 @@ public class ControllerTest {
         controller.getDailyWeather(weatherData);
         Assert.assertEquals("temp should be set to 54.55", "54.55", controller.getTemp());
         Assert.assertEquals("humidity should be set to 74", "74", controller.getHumidity());
-        Assert.assertEquals("tempMin should be set to 53.01", "53.01", controller.getTempMin());
-        Assert.assertEquals("tempMax should be set to 55.99", "55.99", controller.getTempMax());
         Assert.assertEquals("windSpeed should be set to 0.96", "0.96", controller.getWindSpeed());
         Assert.assertEquals("clouds should be set to 0", "0", controller.getClouds());
-    }
-
-    @Test
-    public void fetchWeatherDataTest(){
-        //Cant test API calls
     }
 
     @Test
@@ -136,20 +121,6 @@ public class ControllerTest {
         controller.getDailyWeather(weatherData);
 
         Assert.assertEquals("humidity should be set to 74", "74", controller.getHumidity());
-    }
-
-    @Test
-    public void getTempMinTest() {
-        controller.getDailyWeather(weatherData);
-
-        Assert.assertEquals("tempMin should be set to 53.01", "53.01", controller.getTempMin());
-    }
-
-    @Test
-    public void getTempMaxTest() {
-        controller.getDailyWeather(weatherData);
-
-        Assert.assertEquals("tempMax should be set to 55.99", "55.99", controller.getTempMax());
     }
 
     @Test
@@ -167,34 +138,10 @@ public class ControllerTest {
     }
 
     @Test
-    public void getLocationNameTest(){
+    public void getLocationNameTest() {
         controller.getDailyWeather(weatherData);
 
         Assert.assertEquals("Mountain View", controller.getLocationName());
-    }
-
-    @Test
-    public void getWeekdayMaxTempTest(){
-        controller.getWeeksWeather(weeklyWeatherData);
-        Assert.assertEquals("54.23", controller.getWeekdayMaxTemp(0));
-    }
-
-    @Test
-    public void getWeekdayMinTempTest(){
-        controller.getWeeksWeather(weeklyWeatherData);
-        Assert.assertEquals("48.2", controller.getWeekdayMinTemp(0));
-    }
-
-    @Test
-    public void getWeekdayHumidityTest(){
-        controller.getWeeksWeather(weeklyWeatherData);
-        Assert.assertEquals("75", controller.getWeekdayHumidity(0));
-    }
-
-    @Test
-    public void getWeekdayWindSpeedTest(){
-        controller.getWeeksWeather(weeklyWeatherData);
-        Assert.assertEquals("4.61", controller.getWeekdayWindSpeed(0));
     }
 
     @Test
@@ -205,7 +152,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void weatherIsBadTest(){
+    public void weatherIsBadTest() {
         controller.getDailyWeather(weatherData);
         Assert.assertEquals(false, controller.weatherIsBad());
 

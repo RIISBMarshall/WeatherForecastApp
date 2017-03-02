@@ -7,10 +7,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by bmarshall on 2/27/17.
- */
-
 public class APIHelper {
 
     public String fetchWeatherData(String location, String dayOrWeek) {
@@ -23,9 +19,9 @@ public class APIHelper {
 
         String baseURL;
 
-        if(dayOrWeek.equals("day")){
+        if (dayOrWeek.equals("day")) {
             baseURL = DAY_URL;
-        } else{
+        } else {
             baseURL = WEEK_URL;
         }
 
@@ -36,10 +32,10 @@ public class APIHelper {
             con.setDoOutput(true);
             con.connect();
 
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             is = con.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null)
                 buffer.append(line + "\r\n");
 
@@ -69,10 +65,8 @@ public class APIHelper {
             con = (HttpURLConnection) (new URL(IMG_URL + code + ".png")).openConnection();
             con.setRequestMethod("GET");
             con.setDoInput(true);
-            //con.setDoOutput(true);
             con.connect();
 
-            // Let's read the response
             is = con.getInputStream();
             byte[] buffer = new byte[1024];
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

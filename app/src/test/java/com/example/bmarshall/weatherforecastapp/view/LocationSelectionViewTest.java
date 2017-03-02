@@ -5,7 +5,6 @@ import android.widget.EditText;
 
 import com.example.bmarshall.weatherforecastapp.BuildConfig;
 import com.example.bmarshall.weatherforecastapp.R;
-import com.example.bmarshall.weatherforecastapp.view.LocationSelectionView;
 
 import junit.framework.Assert;
 
@@ -16,12 +15,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.io.IOException;
-
-/**
- * Created by bmarshall on 2/24/17.
- */
-
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
 public class LocationSelectionViewTest {
@@ -30,14 +23,14 @@ public class LocationSelectionViewTest {
     private EditText zipCodeEditText;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         locationSelectionView = Robolectric.buildActivity(LocationSelectionView.class).create().get();
         goButton = (Button) locationSelectionView.findViewById(R.id.go_btn);
         zipCodeEditText = (EditText) locationSelectionView.findViewById(R.id.zipcode_edittext);
     }
 
     @Test
-    public void onClickGoButtonTest() throws IllegalAccessException, IOException, InstantiationException {
+    public void onClickGoButtonTest() {
         zipCodeEditText.setText(locationSelectionView.getString(R.string.goodzip));
         goButton.callOnClick();
         Assert.assertEquals("Saved Location should be equal to valid location entered",

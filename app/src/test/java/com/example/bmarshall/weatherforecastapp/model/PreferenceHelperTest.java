@@ -1,7 +1,6 @@
 package com.example.bmarshall.weatherforecastapp.model;
 
 import com.example.bmarshall.weatherforecastapp.BuildConfig;
-import com.example.bmarshall.weatherforecastapp.model.PreferenceHelper;
 import com.example.bmarshall.weatherforecastapp.view.LocationSelectionView;
 
 import junit.framework.Assert;
@@ -13,12 +12,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.io.IOException;
-
-/**
- * Created by bmarshall on 2/24/17.
- */
-
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
 public class PreferenceHelperTest {
@@ -26,13 +19,13 @@ public class PreferenceHelperTest {
     private LocationSelectionView locationSelectionView;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         preferenceHelper = new PreferenceHelper();
         locationSelectionView = Robolectric.buildActivity(LocationSelectionView.class).create().get();
     }
 
     @Test
-    public void checkValidTest(){
+    public void checkValidTest() {
         String validEntry = "48310";
         Assert.assertEquals("valid entry should return true", true, preferenceHelper.checkValid(validEntry));
         String invalidEntry = "4831";
@@ -40,14 +33,14 @@ public class PreferenceHelperTest {
     }
 
     @Test
-    public void saveLocationTest() throws IllegalAccessException, IOException, InstantiationException {
+    public void saveLocationTest() {
         String location = "48310";
         preferenceHelper.saveLocation(location, locationSelectionView);
         Assert.assertEquals("saveLocation should save the location we enter", location, preferenceHelper.getSavedLocation(locationSelectionView));
     }
 
     @Test
-    public void getSavedLocationTest() throws IllegalAccessException, IOException, InstantiationException {
+    public void getSavedLocationTest() {
         String location = "48310";
         preferenceHelper.saveLocation(location, locationSelectionView);
         Assert.assertEquals("getSavedLocation should return the location we save", location, preferenceHelper.getSavedLocation(locationSelectionView));

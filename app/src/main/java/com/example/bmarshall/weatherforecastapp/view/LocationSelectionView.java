@@ -6,13 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bmarshall.weatherforecastapp.R;
 import com.example.bmarshall.weatherforecastapp.controller.Controller;
-
-import java.io.IOException;
 
 public class LocationSelectionView extends AppCompatActivity {
     public Controller controller;
@@ -30,7 +27,7 @@ public class LocationSelectionView extends AppCompatActivity {
         zipCodeEditText = (EditText) findViewById(R.id.zipcode_edittext);
     }
 
-    public void onClickGoButton(View v) throws IllegalAccessException, IOException, InstantiationException {
+    public void onClickGoButton(View v) {
         String zipCode = String.valueOf(zipCodeEditText.getText());
         if (controller.checkValid(zipCode)) {
             controller.saveLocation(zipCode, this);
@@ -42,7 +39,7 @@ public class LocationSelectionView extends AppCompatActivity {
         }
     }
 
-    public void next() {
+    private void next() {
         if (controller.checkValid(controller.getSavedLocation(this))) {
             Intent intent = new Intent(LocationSelectionView.this, WeatherForecastView.class);
             startActivity(intent);

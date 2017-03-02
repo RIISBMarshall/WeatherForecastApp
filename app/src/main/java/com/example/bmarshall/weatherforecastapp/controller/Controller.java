@@ -7,8 +7,6 @@ import com.example.bmarshall.weatherforecastapp.model.JSONWeatherParser;
 import com.example.bmarshall.weatherforecastapp.model.PreferenceHelper;
 import com.example.bmarshall.weatherforecastapp.model.Weather;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 
 public class Controller {
@@ -36,7 +34,7 @@ public class Controller {
 
     public void getDailyWeather(String weatherData) {
         JSONWeatherParser jSONWeatherParser = new JSONWeatherParser();
-            weather = jSONWeatherParser.getDailyWeather(weatherData);
+        weather = jSONWeatherParser.getDailyWeather(weatherData);
 
     }
 
@@ -75,14 +73,6 @@ public class Controller {
         return weather.getHumidity();
     }
 
-    public String getTempMin() {
-        return weather.getTempMin();
-    }
-
-    public String getTempMax() {
-        return weather.getTempMax();
-    }
-
     public String getWindSpeed() {
         return weather.getWindSpeed();
     }
@@ -99,39 +89,11 @@ public class Controller {
         return weather.getLocationName();
     }
 
-    public String getWeekdayMaxTemp(int day) {
-        return weeksWeather.get(day).getTempMax();
-    }
-
-    public String getWeekdayMinTemp(int day) {
-        return weeksWeather.get(day).getTempMin();
-    }
-
-    public String getWeekdayHumidity(int day) {
-        return weeksWeather.get(day).getHumidity();
-    }
-
-    public String getWeekdayWindSpeed(int day) {
-        return weeksWeather.get(day).getWindSpeed();
-    }
-
-    public byte[] getWeekdayIconData(int day) {
-        return weeksWeather.get(day).getIconData();
-    }
-
-    public void setWeekdayIconData(int day) {
-        APIHelper apiHelper = new APIHelper();
-        weeksWeather.get(day).setIconData(apiHelper.getImage(weeksWeather.get(day).getIcon()));
-    }
-
     public ArrayList<Weather> getWeeksWeatherArray() {
         return weeksWeather;
     }
 
     public boolean weatherIsBad() {
-        if (Double.valueOf(weather.getTemp()) < 10) {
-            return true;
-        }
-        return false;
+        return Double.valueOf(weather.getTemp()) < 10;
     }
 }

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.bmarshall.weatherforecastapp.R;
@@ -47,7 +46,7 @@ public class DailyWeatherFragmentView extends Fragment {
         return view;
     }
 
-    public void showCurrentWeather(){
+    private void showCurrentWeather() {
         byte[] iconData = controller.getIconData();
 
         if (iconData != null && iconData.length > 0) {
@@ -55,7 +54,7 @@ public class DailyWeatherFragmentView extends Fragment {
             imgView.setImageBitmap(img);
         }
 
-        temp.setText( getString(R.string.temperature) + " " + controller.getTemp());
+        temp.setText(getString(R.string.temperature) + " " + controller.getTemp());
         humidity.setText(getString(R.string.humidity) + " " + controller.getHumidity());
         windSpeed.setText(getString(R.string.windspeed) + " " + controller.getWindSpeed());
         clouds.setText(getString(R.string.clouds) + " " + controller.getClouds() + "%");

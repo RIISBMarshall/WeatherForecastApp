@@ -27,10 +27,7 @@ public class PreferenceHelper {
     }
 
     public boolean checkValid(String enteredLocation) {
-        if ((enteredLocation != null) && (enteredLocation.length() == 5) && enteredLocation.matches("[0-9]+")) {
-            return true;
-        } else {
-            return false;
-        }
+        return (enteredLocation != null) && (enteredLocation.length() == 5) &&
+                enteredLocation.matches("[0-9]+");
     }
 }

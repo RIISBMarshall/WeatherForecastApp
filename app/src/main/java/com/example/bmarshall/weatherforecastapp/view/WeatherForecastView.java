@@ -42,7 +42,7 @@ public class WeatherForecastView extends FragmentActivity {
         startActivity(intent);
     }
 
-    public void getAllWeatherData(){
+    private void getAllWeatherData() {
         String location = controller.getSavedLocation(this);
 
         String weatherData = controller.fetchDailyWeatherData(location);
@@ -55,13 +55,13 @@ public class WeatherForecastView extends FragmentActivity {
         controller.setWeeksWeatherIconData();
     }
 
-    public void showBadWeatherNotification(){
-        if(controller.weatherIsBad()){
+    private void showBadWeatherNotification() {
+        if (controller.weatherIsBad()) {
             System.out.println("after");
             String longText = "Warning: Bad weather in your selected area!";
             Intent intent = new Intent(this, WeatherForecastView.class);
             PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
-            Notification n  = new Notification.Builder(this)
+            Notification n = new Notification.Builder(this)
                     .setContentTitle("BAD WEATHER WARNING!!")
                     .setContentText("Subject")
                     .setSmallIcon(R.drawable.icon)
@@ -69,13 +69,13 @@ public class WeatherForecastView extends FragmentActivity {
                     .setAutoCancel(true)
                     .setStyle(new Notification.BigTextStyle().bigText(longText))
                     .addAction(R.drawable.icon, "More", pIntent).build();
-            NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             notificationManager.notify(0, n);
         }
     }
 
-    public void initialisePaging() {
-        List<Fragment> fragments = new Vector<Fragment>();
+    private void initialisePaging() {
+        List<Fragment> fragments = new Vector<>();
         fragments.add(Fragment.instantiate(this, DailyWeatherFragmentView.class.getName()));
         fragments.add(Fragment.instantiate(this, WeeklyWeatherFragmentView.class.getName()));
         PagerAdapter mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);

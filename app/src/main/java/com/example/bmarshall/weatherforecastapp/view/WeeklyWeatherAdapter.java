@@ -1,9 +1,9 @@
 package com.example.bmarshall.weatherforecastapp.view;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +16,15 @@ import com.example.bmarshall.weatherforecastapp.model.Weather;
 
 import java.util.ArrayList;
 
-/**
- * Created by bmarshall on 3/1/17.
- */
+class WeeklyWeatherAdapter extends ArrayAdapter<Weather> {
+    private final Context context;
 
-public class WeeklyWeatherAdapter extends ArrayAdapter<Weather> {
-    private Context context;
-
-    public WeeklyWeatherAdapter(Context context, ArrayList<Weather> weeksWeather) {
+    WeeklyWeatherAdapter(Context context, ArrayList<Weather> weeksWeather) {
         super(context, 0, weeksWeather);
         this.context = context;
     }
 
+    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Weather weather = getItem(position);
@@ -51,8 +48,8 @@ public class WeeklyWeatherAdapter extends ArrayAdapter<Weather> {
             iconView.setImageBitmap(img);
         }
 
-        maxTemp.setText( context.getString(R.string.high) + " " + weather.getTempMax());
-        minTemp.setText(context.getString(R.string.low) + " " +  weather.getTempMin());
+        maxTemp.setText(context.getString(R.string.high) + " " + weather.getTempMax());
+        minTemp.setText(context.getString(R.string.low) + " " + weather.getTempMin());
         humid.setText(context.getString(R.string.humidity) + " " + weather.getHumidity());
         speedWind.setText(context.getString(R.string.windspeed) + " " + weather.getWindSpeed());
         return convertView;

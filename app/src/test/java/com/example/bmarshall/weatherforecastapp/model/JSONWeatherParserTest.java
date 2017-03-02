@@ -4,7 +4,6 @@ import com.example.bmarshall.weatherforecastapp.BuildConfig;
 
 import junit.framework.Assert;
 
-import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +11,6 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-
-/**
- * Created by bmarshall on 2/27/17.
- */
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
@@ -68,14 +63,12 @@ public class JSONWeatherParserTest {
     }
 
     @Test
-    public void getDailyWeather() throws JSONException {
+    public void getDailyWeather() {
         JSONWeatherParser jsonWeatherParser = new JSONWeatherParser();
         Weather weather = jsonWeatherParser.getDailyWeather(weatherData);
 
         Assert.assertEquals("temp should be set to 54.55", "54.55", weather.getTemp());
         Assert.assertEquals("humidity should be set to 74", "74", weather.getHumidity());
-        Assert.assertEquals("tempMin should be set to 53.01", "53.01", weather.getTempMin());
-        Assert.assertEquals("tempMax should be set to 55.99", "55.99", weather.getTempMax());
         Assert.assertEquals("windSpeed should be set to 0.96", "0.96", weather.getWindSpeed());
         Assert.assertEquals("clouds should be set to 0", "0", weather.getClouds());
         Assert.assertEquals("icon should be set to 01n", "01n", weather.getIcon());

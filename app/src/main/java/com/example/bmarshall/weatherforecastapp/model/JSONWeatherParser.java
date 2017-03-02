@@ -1,7 +1,5 @@
 package com.example.bmarshall.weatherforecastapp.model;
 
-import com.example.bmarshall.weatherforecastapp.model.Weather;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,8 +12,6 @@ public class JSONWeatherParser {
     private String locationName;
     private String temp;
     private String humidity;
-    private String tempMin;
-    private String tempMax;
     private String windSpeed;
     private String clouds;
     private String icon;
@@ -29,8 +25,6 @@ public class JSONWeatherParser {
             locationName = getString("name", jObj);
             temp = convertFromKelToFar(getString("temp", mainObj));
             humidity = getString("humidity", mainObj);
-            tempMin = convertFromKelToFar(getString("temp_min", mainObj));
-            tempMax = convertFromKelToFar(getString("temp_max", mainObj));
 
             JSONObject wObj = getObject("wind", jObj);
 
@@ -49,13 +43,15 @@ public class JSONWeatherParser {
             e.printStackTrace();
         }
 
-        return new Weather(locationName, temp, humidity, tempMin, tempMax, windSpeed, clouds, icon);
+        return new Weather(locationName, temp, humidity, windSpeed, clouds, icon);
     }
 
     public ArrayList getWeeksWeather(String data) {
         ArrayList<Weather> weeksWeather = new ArrayList<>(5);
+        String tempMin;
+        String tempMax;
 
-        JSONObject jObj = null;
+        JSONObject jObj;
         try {
             jObj = new JSONObject(data);
 
@@ -94,8 +90,7 @@ public class JSONWeatherParser {
     }
 
     private static JSONObject getObject(String tagName, JSONObject jObj) throws JSONException {
-        JSONObject subObj = jObj.getJSONObject(tagName);
-        return subObj;
+        return jObj.getJSONObject(tagName);
     }
 
     private static String getString(String tagName, JSONObject jObj) throws JSONException {

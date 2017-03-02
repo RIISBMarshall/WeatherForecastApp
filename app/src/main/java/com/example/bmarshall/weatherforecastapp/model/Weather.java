@@ -1,34 +1,28 @@
 package com.example.bmarshall.weatherforecastapp.model;
 
-/**
- * Created by bmarshall on 2/27/17.
- */
-
 public class Weather {
 
     private String locationName;
     private String temp;
-    private String humidity;
+    private final String humidity;
     private String tempMin;
     private String tempMax;
-    private String windSpeed;
+    private final String windSpeed;
     private String clouds;
-    private String icon;
+    private final String icon;
     private byte[] iconData;
 
-    public Weather(String locationName, String temp, String humidity, String tempMin, String tempMax, String windSpeed,
+    public Weather(String locationName, String temp, String humidity, String windSpeed,
                    String clouds, String icon) {
         this.locationName = locationName;
         this.temp = temp;
         this.humidity = humidity;
-        this.tempMin = tempMin;
-        this.tempMax = tempMax;
         this.windSpeed = windSpeed;
         this.clouds = clouds;
         this.icon = icon;
     }
 
-    public Weather(String tempMax, String tempMin, String windSpeed, String humidity, String icon){
+    public Weather(String tempMax, String tempMin, String windSpeed, String humidity, String icon) {
         this.tempMax = tempMax;
         this.tempMin = tempMin;
         this.windSpeed = windSpeed;
